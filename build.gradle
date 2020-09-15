@@ -1,4 +1,11 @@
 buildscript {
+
+    ext {
+        tag = "spring" as String
+        prefix = "msa" as String
+        springCloudVersion = "Hoxton.SR8" as String
+    }
+
     repositories {
         maven {
             url "https://plugins.gradle.org/m2/"
@@ -22,7 +29,15 @@ subprojects {
     apply plugin: 'com.palantir.docker'
 
     group = 'me.sun'
-    sourceCompatibility = '11'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '1.8'
+
+    ext {
+        dockerName = "$prefix/$project.name:$tag"
+        scriptPath = "src/main/docker/run.sh"
+        jarPath = "$buildDir/libs/"
+        dockerFile = "src/main/docker/Dockerfile"
+    }
 
     configurations {
         compileOnly {
@@ -45,5 +60,11 @@ subprojects {
 
     test {
         useJUnitPlatform()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
     }
 }

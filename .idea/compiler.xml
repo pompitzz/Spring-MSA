@@ -8,10 +8,11 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.12/48e4e5d60309ebd833bc528dcf77668eab3cd72c/lombok-1.18.12.jar" />
         </processorPath>
-        <module name="Spring-MSA.test-module.main" />
+        <module name="Spring-MSA.config-server.main" />
+        <module name="Spring-MSA.licensing-service.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11">
+    <bytecodeTargetLevel target="1.8">
       <module name="test-module" target="11" />
       <module name="test-module.main" target="11" />
       <module name="test-module.test" target="11" />
