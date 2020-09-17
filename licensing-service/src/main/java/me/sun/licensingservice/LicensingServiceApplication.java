@@ -7,8 +7,12 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Component;
 
+@EnableFeignClients
+@EnableDiscoveryClient
 @SpringBootApplication
 public class LicensingServiceApplication {
 
@@ -26,7 +30,7 @@ public class LicensingServiceApplication {
         public void run(ApplicationArguments args) {
 
             License license1 = License.builder()
-                    .organizationId("1L")
+                    .organizationId("1")
                     .licenseType("user")
                     .productName("CustomerPro")
                     .licenseMax(100)

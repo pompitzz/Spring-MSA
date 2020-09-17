@@ -9,6 +9,8 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.12/48e4e5d60309ebd833bc528dcf77668eab3cd72c/lombok-1.18.12.jar" />
         </processorPath>
         <module name="Spring-MSA.config-server.main" />
+        <module name="Spring-MSA.eureka-server.main" />
+        <module name="Spring-MSA.organization-service.main" />
         <module name="Spring-MSA.licensing-service.main" />
       </profile>
     </annotationProcessing>

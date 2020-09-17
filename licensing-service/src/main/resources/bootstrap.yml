@@ -2,7 +2,7 @@ spring:
   application:
     name: licensingservice # 스프링 클라우드 컨피그 서버의 디렉터리 이름과 일치해야 한다.
   profiles:
-    active: default # dev로 전달한다면 dev 구성을 조회하여 사용할 것이다.
+    active: dev # dev로 전달한다면 dev 구성을 조회하여 사용할 것이다.
   cloud:
     config:
       uri: http://localhost:8888

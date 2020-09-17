@@ -1,7 +1,8 @@
 package me.sun.licensingservice.service;
 
 import lombok.RequiredArgsConstructor;
-import me.sun.licensingservice.config.ServiceConfig;
+import me.sun.licensingservice.controllers.dto.LicenseOrgDto;
+import me.sun.licensingservice.controllers.dto.OrganizationDto;
 import me.sun.licensingservice.model.License;
 import me.sun.licensingservice.repository.LicenseRepository;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class LicenseService {
     private final LicenseRepository licenseRepository;
-    private final ServiceConfig serviceConfig;
+    private final OrganizationAdapter organizationAdapter;
 
-    public License appendComment(String organizationId, String licenseId) {
-        License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
-        license.setComment(serviceConfig.getExampleProperty());
-        return license;
+    public LicenseOrgDto getLicense(Long organizationId, String licenseId, String clientType) {
+        License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId.toString(), licenseId);
+
+        OrganizationDto organization = organizationAdapter.getOrganizationDto(organizationId, clientType);
+
+        return new LicenseOrgDto(license, organization);
     }
 
     public List<License> getLicensesByOrg(String organizationId) {

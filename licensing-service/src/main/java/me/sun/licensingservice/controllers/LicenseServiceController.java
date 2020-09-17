@@ -1,6 +1,8 @@
 package me.sun.licensingservice.controllers;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import me.sun.licensingservice.controllers.dto.LicenseOrgDto;
 import me.sun.licensingservice.model.License;
 import me.sun.licensingservice.service.LicenseService;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "v1/organizations/{organizationId}/licenses")
@@ -21,10 +24,11 @@ public class LicenseServiceController {
         return licenseService.getLicensesByOrg(organizationId);
     }
 
-    @RequestMapping(value = "/{licenseId}", method = RequestMethod.GET)
-    public License getLicenses(@PathVariable("organizationId") String organizationId,
-                               @PathVariable("licenseId") String licenseId) {
-        return licenseService.appendComment(organizationId, licenseId);
+    @GetMapping("/{licenseId}/{clientType}")
+    public LicenseOrgDto getLicensesWithClientType(@PathVariable("organizationId") Long organizationId,
+                                                   @PathVariable("licenseId") String licenseId,
+                                                   @PathVariable("clientType") String clinetType) {
+        return licenseService.getLicense(organizationId, licenseId, clinetType);
     }
 
     @RequestMapping(value = "{licenseId}", method = RequestMethod.PUT)

@@ -10,10 +10,19 @@ services:
       MYSQL_PASSWORD: password-default
       MYSQL_DATABASE: msa-default
 
+  eurekaserver:
+    image: msa/eureka-server:spring
+    ports:
+      - 8761:8761
+    environment:
+      PROFILE: default
+
   configserver:
     image: msa/config-server:spring
     ports:
     - 8888:8888
+    environment:
+      EUREKA_PORT: 8761
 
   licensingservice:
     image: msa/licensing-service:spring
@@ -25,3 +34,16 @@ services:
       SERVER_PORT: 8080
       CONFIG_PORT: 8888
       DB_PORT: 3306
+      EUREKA_PORT: 8761
+
+  organizationserver:
+    image: msa/organization-service:spring
+    ports:
+      - 8081:8081
+    environment:
+      PROFILE: default
+      CONFIG_URI: "http://configserver:8888"
+      SERVER_PORT: 8081
+      CONFIG_PORT: 8888
+      DB_PORT: 3306
+      EUREKA_PORT: 8761
